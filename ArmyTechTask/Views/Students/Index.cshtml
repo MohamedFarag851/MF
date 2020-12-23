@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ArmyTechTask.Models.Student>
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<button class="btn btn-default ">
+    @Html.ActionLink("Create New Student", "Create")
+</button>
+
+<br />
+<br />
+
+
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Governorate)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Neighborhood)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Field)
+            </th>
+            <th class="text-center">
+                Teachers
+            </th>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Governorate.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Neighborhood.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Field.Name)
+        </td>
+        <td>
+            @if (item.StudentTeachers.Count() > 0)
+            {
+
+
+
+                foreach (var tech in item.StudentTeachers)
+                {
+                    @Html.DisplayFor(modelItem => tech.Teacher.Name) <br />
+                }
+
+            }
+            else
+            {
+                
+                @Html.ActionLink("Assign Teachers", "CreateStudentTeacher", "StudentTeachers")
+            }
+
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+             
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+    }
+
+</table>

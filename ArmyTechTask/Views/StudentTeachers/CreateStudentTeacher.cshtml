@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "CreateStudentTeacher";
+}
+
+<h2>Assign Teachers to Students</h2>
+
+
+<form method="post" action="/StudentTeachers/CreateStudentTeacher">
+
+    <br />
+
+    Student Name @Html.DropDownList("ID", "Select Student")
+
+    <ul>
+
+        @foreach (var teacher in ViewBag.Teachers)
+        {
+
+            <li style="list-style-type:none">
+                <input type="checkbox" name="TeacherIds" value="@teacher.ID" /> @teacher.Name
+            </li>
+
+        }
+
+    </ul>
+
+    <input type="submit" value="Assign Student's Teacher(s)" />
+
+
+</form>
